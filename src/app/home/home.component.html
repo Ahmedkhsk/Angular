@@ -1,10 +1,13 @@
-<div class="container">
-    <div class="text-center">
-        <h1>Hello my name is {{username}}</h1>
-        <!-- <input type="text" [value]="username" class="from-control" (keyup)="changeName($event)"><hr> -->
-        <input type="text" class="from-control w-25 mx-auto border-3 border-red" [(ngModel)]="username"><hr>
-        <h1 [class] ="userage > 50 ? 'bg-danger' : 'bg-info'">Hello my age is {{userage}}</h1> 
-        <img [src]="imageURL" alt="">
-        <button (click)="changeAge()" class="btn btn-info">Click</button>   
+<div class="container my-5">
+    <div class="row gy-5">
+        @for (meal of meals; track $index)
+        {
+             <div class="col-md-4">
+                <app-card [inp]="meal"> </app-card>
+             </div>   
+        }
+        @empty {
+            <h1>Sorry we dont have any Products</h1>
+         }
     </div>
 </div>
