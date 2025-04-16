@@ -51,17 +51,7 @@
 
     <!-- lazy load -->
     @defer (on interaction ; prefetch on immediate) {
-    <div class="row gy-5">
-        @for (meal of meals; track $index)
-        {
-        <div class="col-md-6">
-            <app-card [inp]="meal"> </app-card>
-        </div>
-        }
-        @empty {
-        <h1>Sorry we dont have any Products</h1>
-        }
-    </div>
+        <app-recomended></app-recomended>
     }
     @placeholder {
     <h1>Hello from placeholder</h1>

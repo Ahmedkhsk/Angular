@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './contact/contact.component';
 import { ProductsComponent } from './products/products.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SettingComponent } from './setting/setting.component';
 import { WebComponent } from './web/web.component';
 import { MobileComponent } from './mobile/mobile.component';
+import { RecomendedComponent } from './recomended/recomended.component';
 
 export const routes: Routes = [
 
@@ -20,6 +20,7 @@ export const routes: Routes = [
     { path: 'about', loadComponent: () => import('./about/about.component').then(m => m.AboutComponent) }, // lazy loading
     { path: 'contact', loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent) }, 
     { path: 'products', component: ProductsComponent },
+    { path: 'recomended', component: RecomendedComponent },
     { path: 'setting', component: SettingComponent , children:[
         { path: '', redirectTo: "web" , pathMatch:"full"},
         { path: 'web', component: WebComponent },
