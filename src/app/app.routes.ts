@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductsComponent } from './products/products.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -18,8 +17,8 @@ export const routes: Routes = [
     { path: 'home/setting', component: HomeComponent }, 
     { path: 'home', component: HomeComponent },
     
-    { path: 'about', component: AboutComponent },
-    { path: 'contact', component: ContactComponent },
+    { path: 'about', loadComponent: () => import('./about/about.component').then(m => m.AboutComponent) }, // lazy loading
+    { path: 'contact', loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent) }, 
     { path: 'products', component: ProductsComponent },
     { path: 'setting', component: SettingComponent , children:[
         { path: '', redirectTo: "web" , pathMatch:"full"},
