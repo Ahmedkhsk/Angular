@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Meal } from '../meal';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-card',
@@ -8,5 +8,5 @@ import { Meal } from '../meal';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
-    @Input() inp: Meal = {} as Meal
+    @Input() inp: Category = {} as Category
 }

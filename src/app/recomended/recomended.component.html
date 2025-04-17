@@ -1,11 +1,13 @@
-<div class="row gy-5">
-    @for (meal of meals; track $index)
-    {
-    <div class="col-md-6">
-        <app-card [inp]="meal"> </app-card>
+<div class="container m-10">
+    <div class="row gy-5">
+        @for (category of categories; track $index)
+        {
+        <div class="col-md-5">
+            <app-card [inp]="category"> </app-card>
+        </div>
+        }
+        @empty {
+        <h1>Sorry we dont have any Products</h1>
+        }
     </div>
-    }
-    @empty {
-    <h1>Sorry we dont have any Products</h1>
-    }
 </div>
