@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { CardComponent } from "../card/card.component";
 import { CategoriesService } from '../categories.service';
+import { LoaderComponent } from "../loader/loader.component";
+import { Category } from '../category';
 
 @Component({
   selector: 'app-recomended',
-  imports: [CardComponent],
+  imports: [CardComponent, LoaderComponent],
   templateUrl: './recomended.component.html',
   styleUrl: './recomended.component.scss'
 })
 export class RecomendedComponent {
   // meals: Meal[] = [];
-  categories:any;
+  categories: Category[] = [];
   constructor(private _categoriesService: CategoriesService) {
   //   this.meals = this._mealsService.meals;
 

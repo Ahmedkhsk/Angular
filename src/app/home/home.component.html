@@ -1,15 +1,15 @@
-<!-- All Products -->
-<h4>All Categories</h4>
-<div class="container m-10">
-    <div class="row gy-5">
-        @for (category of categories; track $index)
-        {
-            <div class="col-md-5">
-                <app-card [inp]="category"> </app-card>
-            </div>
-        }
-        @empty {
-        <h1>Sorry we dont have any Products</h1>
-        }
-    </div>
+@if(categories.length == 0) {
+<app-loader></app-loader>
+} @else {
+<app-contact [userName]="username"></app-contact>
+<button class="btn btn-info" (click)="changeName()" style="margin-bottom: 10px">
+  Ok</button
+><br />
+<div class="row gy-5">
+  @for (category of categories; track $index) {
+  <div class="col-md-5">
+    <app-card [inp]="category"> </app-card>
+  </div>
+  }
 </div>
+}
