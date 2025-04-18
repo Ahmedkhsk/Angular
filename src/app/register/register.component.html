@@ -1,0 +1,85 @@
+<form [formGroup]="registerForm" class="border border-2 border-warning p-3 w-75 mx-auto">
+  <h1>Register Now:</h1>
+  @if(errorMessage)
+  {
+    <p class="bg-danger p-2">{{errorMessage}}</p>
+  }
+  <div class="form-group m-3">
+    <label for="name">UserName: </label>
+    <input type="text" class="form-control" id="name" formControlName="username" />
+    
+    @if(registerForm.get('username')?.errors && registerForm.get('username')?.touched){
+    <div class="alert alert-danger errors mt-3">
+      @if(registerForm.get('username')?.errors?.['required']){
+      <p class="mb-0">Username is required</p>
+      } @else if(registerForm.get('username')?.errors?.['minlength']){
+      <p class="mb-0">Username must be at least 3 characters long</p>
+      } @else if(registerForm.get('username')?.errors?.['maxlength']){
+      <p class="mb-0">Username must be at most 20 characters long</p>
+      } 
+    </div>
+    }    
+  </div>
+
+  <div class="form-group m-3">
+    <label for="email">Email: </label>
+    <input type="email" class="form-control" id="email" formControlName="email" />
+    @if(registerForm.get('email')?.errors && registerForm.get('email')?.touched){
+      <div class="alert alert-danger errors mt-3">
+        @if(registerForm.get('email')?.errors?.['required']){
+        <p class="mb-0">Email is required</p>
+        } @else if(registerForm.get('email')?.errors?.['email']){
+        <p class="mb-0">Email error in Signture</p>
+        } 
+      </div>
+      }
+  </div>
+  <div class="form-group m-3">
+    <label for="password">Password: </label>
+    <input type="password" class="form-control" id="password" formControlName="password" />
+    @if(registerForm.get('password')?.errors && registerForm.get('password')?.touched){
+      <div class="alert alert-danger errors mt-3">
+        @if(registerForm.get('password')?.errors?.['required']){
+        <p class="mb-0">Password is required</p>
+        } @else if(registerForm.get('password')?.errors?.['minlength']){
+        <p class="mb-0">Password must be at least 8 characters long</p>
+        } @else if(registerForm.get('password')?.errors?.['maxlength']){
+        <p class="mb-0">Password must be at most 20 characters long</p>
+        } 
+      </div>
+      }
+  </div>
+  <div class="form-group m-3">
+    <label for="repassword">RePassword: </label>
+    <input type="password" class="form-control" id="repassword" formControlName="rePassword" />
+    @if(registerForm.get('rePassword')?.errors && registerForm.get('rePassword')?.touched){
+      <div class="alert alert-danger errors mt-3">
+        @if(registerForm.get('rePassword')?.errors?.['required']){
+        <p class="mb-0">RePassword is required</p>
+        } @else if(registerForm.get('rePassword')?.errors?.['minlength']){
+        <p class="mb-0">RePassword must be at least 3 characters long</p>
+        } @else if(registerForm.get('rePassword')?.errors?.['maxlength']){
+        <p class="mb-0">RePassword must be at most 20 characters long</p>
+        } 
+      </div>
+      }
+  </div>
+  <div class="form-group m-3">
+    <label for="phone">Phone: </label>
+    <input type="number" class="form-control" id="phone" formControlName="phone" />
+    @if(registerForm.get('phone')?.errors && registerForm.get('phone')?.touched){
+      <div class="alert alert-danger errors mt-3">
+        @if(registerForm.get('phone')?.errors?.['required']){
+        <p class="mb-0">Phone is required</p>
+        } @else if(registerForm.get('phone')?.errors?.['pattern']){
+        <p class="mb-0">Invalid Pattern</p>
+        } 
+      </div>
+      }
+  </div>
+  <div class="form-group m-3">
+    <button (click)="register()" class="btn btn-info ms-auto d-block">
+      Register
+    </button>
+  </div>
+</form>

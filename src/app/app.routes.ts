@@ -6,6 +6,7 @@ import { SettingComponent } from './setting/setting.component';
 import { WebComponent } from './web/web.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { RecomendedComponent } from './recomended/recomended.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
 
@@ -21,6 +22,7 @@ export const routes: Routes = [
     { path: 'contact', loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent) }, 
     { path: 'products', component: ProductsComponent },
     { path: 'recomended', component: RecomendedComponent },
+    { path: 'register', component: RegisterComponent },
     { path: 'setting', component: SettingComponent , children:[
         { path: '', redirectTo: "web" , pathMatch:"full"},
         { path: 'web', component: WebComponent },
