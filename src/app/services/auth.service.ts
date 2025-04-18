@@ -12,6 +12,6 @@ export class AuthService {
 
   register(data:any):Observable<any> 
   {
-    return this.httpclient.post("",data);
+    return this.httpclient.post("http://shoesecommerce.runasp.net/api/Account/Register?lan=en",data);
   } 
 }

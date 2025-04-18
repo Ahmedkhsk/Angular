@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,9 +10,11 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+  router = inject(Router);
   errorMessage: string = '';
+  isLoading: boolean = false;
   registerForm: FormGroup = new FormGroup({
-    username: new FormControl(
+    name: new FormControl(
       '',
       [
         Validators.required,
@@ -31,23 +34,7 @@ export class RegisterComponent {
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(20),
-      ]),
-    
-    rePassword: new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-      ]),
-    
-    phone: new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.pattern(/^\d{10}$/),
-      ]),
-    
+      ])
   });
   
   constructor(private _authService: AuthService) { }
@@ -59,13 +46,16 @@ export class RegisterComponent {
     }
     else {
       this.errorMessage = '';
+      this.isLoading = true;
       this._authService.register(this.registerForm.value).subscribe({
         next: (res) => {
           console.log(res);
           this.registerForm.reset();
+          this.router.navigate(['/home']);
         },
         error: (err) => {
           console.log(err);
+          this.isLoading = false;
           this.errorMessage = err.error.message;
         },
         complete: () => {
