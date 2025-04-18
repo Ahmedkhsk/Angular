@@ -1,7 +1,11 @@
 @if(categories.length == 0) {
-<app-loader></app-loader>
+<app-loader>
+  <p>Ahmed Khaled</p>
+</app-loader>
 } @else {
-<app-contact [userName]="username"></app-contact>
+<app-contact [userName]="username">
+  <p>Ahmed Khaled</p>
+</app-contact>
 <button class="btn btn-info" (click)="changeName()" style="margin-bottom: 10px">
   Ok</button
 ><br />

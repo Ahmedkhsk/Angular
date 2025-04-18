@@ -7,7 +7,7 @@ import { AfterContentInit, AfterViewInit, Component, DoCheck, Input, OnChanges, 
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent  implements OnChanges,OnInit , DoCheck,AfterViewInit,AfterContentInit{
-  @Input() userName: string  = '';
+  @Input() userName!: string;
   constructor() { 
     console.log(this.userName,"Hello from constructor");
   }
@@ -16,7 +16,6 @@ export class ContactComponent  implements OnChanges,OnInit , DoCheck,AfterViewIn
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // Logic to handle changes can be added here
     console.log(this.userName,changes,"hello from changes:");
   }
   ngOnInit(): void {
