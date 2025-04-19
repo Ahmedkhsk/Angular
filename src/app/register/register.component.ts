@@ -49,22 +49,15 @@ export class RegisterComponent {
       this.isLoading = true;
       this._authService.register(this.registerForm.value).subscribe({
         next: (res) => {
-          console.log(res);
           this.registerForm.reset();
           this.router.navigate(['/login']);
         },
         error: (err) => {
-          console.log(err);
           this.isLoading = false;
           this.errorMessage = err.error.message;
-        },
-        complete: () => {
-          console.log("Registration completed successfully.");
         }
       });
     }
-    console.log(this.registerForm);
-
   }
 
 }

@@ -1,41 +1,36 @@
-import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Inject, inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  router = inject(Router);
   httpclient = inject(HttpClient);
-  isBrowser: boolean = false;
   loggedInUser: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
-  constructor(@Inject(PLATFORM_ID) platformId: object) {
-    this.isBrowser = isPlatformBrowser(platformId);
+  constructor() { }
 
-    if (this.isBrowser) {
-      if (localStorage.getItem("token")) {
-        this.loggedInUser.next(localStorage.getItem("token") || "");
-      }
-    }
-
+  register(data:any):Observable<any> 
+  {
+    return this.httpclient.post("http://shoesecommerce.runasp.net/api/Account/Register?lan=en",data);
+  } 
+  
+  login(data:any):Observable<any> 
+  {
+    return this.httpclient.post("http://shoesecommerce.runasp.net/api/Account/Login?lan=en",data);
   }
-
-
-  saveUserData(token: string) {
-    if (this.isBrowser) {
-      localStorage.setItem("token", JSON.stringify(token));
-      this.loggedInUser.next(token);
-    }
+  logOut(){
+    localStorage.removeItem("token");
+    this.router.navigate(['/login']);
+    this.loggedInUser.next("");
   }
-
-  register(data: any): Observable<any> {
-    return this.httpclient.post("http://shoesecommerce.runasp.net/api/Account/Register?lan=en", data);
-  }
-
-  login(data: any): Observable<any> {
-    return this.httpclient.post("http://shoesecommerce.runasp.net/api/Account/Login?lan=en", data);
+  saveUserData(token:string)
+  {
+    localStorage.setItem("token", JSON.stringify(token));
+    this.loggedInUser.next(token);
   }
 
 }

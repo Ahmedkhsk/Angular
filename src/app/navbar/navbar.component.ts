@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { json } from 'stream/consumers';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -21,7 +20,10 @@ export class NavbarComponent implements OnInit{
   }
 
   ngOnInit(): void {
-  //this.isLoggedIn = JSON.parse(localStorage.getItem("token") || 'false');
+    this.isLoggedIn = JSON.parse(localStorage.getItem("token") || 'false');
   }
 
+  logOut(){
+    this._auth.logOut();
+  }
 }
