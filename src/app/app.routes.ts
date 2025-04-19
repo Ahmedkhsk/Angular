@@ -7,14 +7,12 @@ import { WebComponent } from './web/web.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { RecomendedComponent } from './recomended/recomended.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
 
     {path: '' , redirectTo:'home' , pathMatch: "full"},
-    
-    //home هياخد full ب pathMatch هنا لو كان ال   => home
-    //home مش هيهمه اي حاجه اهم حاجه تكون الكلمه الاولانيه ب prefix امال لو كان ب => home/setting
-    
+
     { path: 'home/setting', component: HomeComponent }, 
     { path: 'home', component: HomeComponent },
     
@@ -23,6 +21,7 @@ export const routes: Routes = [
     { path: 'products', component: ProductsComponent },
     { path: 'recomended', component: RecomendedComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'login', component: LoginComponent },
     { path: 'setting', component: SettingComponent , children:[
         { path: '', redirectTo: "web" , pathMatch:"full"},
         { path: 'web', component: WebComponent },
@@ -31,6 +30,6 @@ export const routes: Routes = [
 
      },
 
-    {path: '**' , component: NotFoundComponent} // لازم تتحط اخر حاجه في الاراي
+    {path: '**' , component: NotFoundComponent} 
 
 ];

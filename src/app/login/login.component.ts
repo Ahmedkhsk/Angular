@@ -4,23 +4,16 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   imports: [ReactiveFormsModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class RegisterComponent {
+export class LoginComponent {
   router = inject(Router);
   errorMessage: string = '';
   isLoading: boolean = false;
-  registerForm: FormGroup = new FormGroup({
-    name: new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
-      ]),
+  loginForm: FormGroup = new FormGroup({
     email: new FormControl(
       '',
       [
@@ -40,18 +33,19 @@ export class RegisterComponent {
   constructor(private _authService: AuthService) { }
 
   
-  register() {
-    if(this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
+  login() {
+    if(this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
     }
     else {
       this.errorMessage = '';
       this.isLoading = true;
-      this._authService.register(this.registerForm.value).subscribe({
+      this._authService.login(this.loginForm.value).subscribe({
         next: (res) => {
           console.log(res);
-          this.registerForm.reset();
-          this.router.navigate(['/login']);
+          this._authService.saveUserData(res.data);
+          this.loginForm.reset();
+          this.router.navigate(['/home']);
         },
         error: (err) => {
           console.log(err);
@@ -59,11 +53,11 @@ export class RegisterComponent {
           this.errorMessage = err.error.message;
         },
         complete: () => {
-          console.log("Registration completed successfully.");
+          console.log("Login completed successfully.");
         }
       });
     }
-    console.log(this.registerForm);
+    console.log(this.loginForm);
 
   }
 
