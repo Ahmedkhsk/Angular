@@ -16,11 +16,15 @@ export class NavbarComponent implements OnInit{
     _auth.loggedInUser.subscribe((res) => {
       if(res)
         this.isLoggedIn = res ? true : false;
+      else
+        this.isLoggedIn = false;
     })
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = JSON.parse(localStorage.getItem("token") || 'false');
+    if (typeof window !== 'undefined' && localStorage) {
+      this.isLoggedIn = JSON.parse(localStorage.getItem("token") || 'false');
+    }  
   }
 
   logOut(){
